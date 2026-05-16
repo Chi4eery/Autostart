@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет обучающегося - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=19">
+</head>
+<body class="student-app-body">
+  <div class="student-app">
+    <aside class="student-sidebar" id="student-sidebar">
+      <div class="student-sidebar-top">
+        <a class="brand" href="index.html">АвтоСтарт</a>
+        <span class="student-role">Обучающийся</span>
+      </div>
+
+      <nav class="student-menu" aria-label="Разделы кабинета">
+        <button class="student-menu-item" type="button" data-section-target="profile">Личные данные</button>
+        <button class="student-menu-item active" type="button" data-section-target="schedule">Расписание</button>
+        <button class="student-menu-item" type="button" data-section-target="theory">Теория</button>
+        <button class="student-menu-item" type="button" data-section-target="driving">Вождение</button>
+        <button class="student-menu-item" type="button" data-section-target="exams">Экзамены</button>
+        <button class="student-menu-item" type="button" data-section-target="progress">Прогресс</button>
+        <button class="student-menu-item" type="button" data-section-target="materials">Материалы</button>
+        <button class="student-menu-item" type="button" data-section-target="contacts">Связь</button>
+      </nav>
+
+      <div class="student-sidebar-actions">
+        <a class="button secondary" href="index.html">На главную</a>
+        <button class="secondary" type="button" data-logout>Выйти</button>
+      </div>
+    </aside>
+
+    <div class="student-workspace">
+      <header class="student-topbar">
+        <button class="student-menu-toggle secondary" type="button" data-student-menu-toggle>Меню</button>
+        <div>
+          <h1 id="section-title">Расписание</h1>
+          <p id="section-description">Здесь показаны только ваши активные записи на занятия. Для новой записи используйте вкладки «Теория», «Вождение» и «Экзамены».</p>
+        </div>
+        <div class="student-topbar-user">
+          <div class="notification-wrapper">
+            <button class="notification-bell secondary" type="button" data-notification-toggle aria-label="Уведомления">
+              <span class="bell-icon" aria-hidden="true">🔔</span>
+              <b id="topbar-notification-count">0</b>
+            </button>
+            <div class="notification-popover" id="notification-popover" hidden>
+              <div class="popover-head">
+                <strong>Уведомления</strong>
+                <span id="popover-notification-count">0 новых</span>
+              </div>
+              <div class="compact-list" id="notification-popover-list"></div>
+            </div>
+          </div>
+          <div>
+            <strong id="student-name">Обучающийся</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="student-content">
+        <p id="dashboard-message" class="message"></p>
+
+        <section class="student-section" data-section="profile">
+          <div class="student-section-head">
+            <div>
+              <h2>Личные данные</h2>
+              <p>Контактные данные используются автошколой для связи и организационных уведомлений.</p>
+            </div>
+          </div>
+          <div class="student-panel" id="profile-card"></div>
+        </section>
+
+        <section class="student-section active" data-section="schedule">
+          <div class="student-section-head">
+            <div>
+              <h2>Расписание</h2>
+              <p>Здесь показаны только ваши активные записи на занятия.</p>
+            </div>
+          </div>
+
+          <div class="student-calendar" id="lessons-list">
+            <div class="empty">Загрузка расписания...</div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="theory">
+          <div class="student-section-head">
+            <div>
+              <h2>Теоретические занятия</h2>
+              <p>Выберите тему и посмотрите, какие преподаватели открыли свободное время для записи.</p>
+            </div>
+          </div>
+          <div class="student-panel">
+            <div class="section-inline-stats" id="theory-stats"></div>
+            <div class="lesson-board theory-board" id="theory-lessons"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="driving">
+          <div class="student-section-head">
+            <div>
+              <h2>Вождение</h2>
+              <p>Выберите доступное практическое занятие у инструктора и запишитесь на удобное время.</p>
+            </div>
+          </div>
+          <div class="driving-layout">
+            <div class="student-panel" id="driving-progress"></div>
+            <div class="student-panel">
+              <h3>Доступные занятия по вождению</h3>
+              <div class="lesson-board compact-lessons" id="driving-lessons-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="exams">
+          <div class="student-section-head">
+            <div>
+              <h2>Экзамены</h2>
+              <p>Допуск зависит от отмеченного прогресса по теории и вождению.</p>
+            </div>
+          </div>
+          <div class="student-grid-3" id="exam-cards"></div>
+        </section>
+
+        <section class="student-section" data-section="progress">
+          <div class="student-section-head">
+            <div>
+              <h2>Прогресс</h2>
+              <p>Сводка по теории, вождению и экзаменам.</p>
+            </div>
+          </div>
+          <div id="progress-details"></div>
+        </section>
+
+        <section class="student-section" data-section="materials">
+          <div class="student-section-head">
+            <div>
+              <h2>Материалы</h2>
+              <p>Конспекты, памятки и ссылки доступны после зачисления.</p>
+            </div>
+          </div>
+          <div class="student-filters">
+            <div class="form-row">
+              <label for="material-filter-course">Курс</label>
+              <select id="material-filter-course"></select>
+            </div>
+          </div>
+          <div class="material-board" id="dashboard-materials">
+            <div class="empty">Загрузка материалов...</div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="contacts">
+          <div class="student-section-head">
+            <div>
+              <h2>Связь с автошколой</h2>
+              <p>Контакты инструкторов и администраторов для организационных вопросов.</p>
+            </div>
+          </div>
+          <div class="contact-board" id="staff-contacts">
+            <div class="empty">Загрузка контактов...</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js?v=5"></script>
+  <script src="js/dashboard.js?v=23"></script>
+</body>
+</html>

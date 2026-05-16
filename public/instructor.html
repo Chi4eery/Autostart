@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет инструктора - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=18">
+</head>
+<body class="student-app-body">
+  <div class="student-app">
+    <aside class="student-sidebar" id="instructor-sidebar">
+      <div class="student-sidebar-top">
+        <a class="brand" href="index.html">АвтоСтарт</a>
+        <span class="student-role">Инструктор</span>
+      </div>
+
+      <nav class="student-menu" aria-label="Разделы инструктора">
+        <button class="student-menu-item active" type="button" data-section-target="schedule">Расписание</button>
+        <button class="student-menu-item" type="button" data-section-target="students">Студенты</button>
+        <button class="student-menu-item" type="button" data-section-target="theory">Теория</button>
+        <button class="student-menu-item" type="button" data-section-target="driving">Вождение</button>
+        <button class="student-menu-item" type="button" data-section-target="results">Результаты</button>
+      </nav>
+
+      <div class="student-sidebar-actions">
+        <a class="button secondary" href="index.html">На главную</a>
+        <button class="secondary" type="button" data-logout>Выйти</button>
+      </div>
+    </aside>
+
+    <div class="student-workspace">
+      <header class="student-topbar">
+        <button class="student-menu-toggle secondary" type="button" data-instructor-menu-toggle>Меню</button>
+        <div>
+          <h1 id="section-title">Расписание</h1>
+          <p id="section-description">Ближайшие занятия по порядку: дата, время, тип занятия и записанные студенты.</p>
+        </div>
+        <div class="student-topbar-user">
+          <div>
+            <strong id="instructor-name">Инструктор</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="student-content">
+        <p id="instructor-message" class="message"></p>
+
+        <section class="student-section active" data-section="schedule">
+          <div class="student-section-head">
+            <div>
+              <h2>Мое расписание</h2>
+              <p>Ближайшие занятия по порядку: дата, время, тип занятия и записанные студенты.</p>
+            </div>
+          </div>
+          <div class="management-board" id="instructor-schedule"></div>
+        </section>
+
+        <section class="student-section" data-section="students">
+          <div class="student-section-head">
+            <div>
+              <h2>Студенты</h2>
+              <p>Обучающиеся, записанные на ваши занятия.</p>
+            </div>
+          </div>
+          <div class="management-board" id="instructor-students"></div>
+        </section>
+
+        <section class="student-section" data-section="theory">
+          <div class="student-section-head">
+            <div>
+              <h2>Теоретические занятия</h2>
+              <p>Выберите тему, укажите дату и время. Студенты увидят этот слот внутри выбранной темы.</p>
+            </div>
+          </div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="instructor-theory-form">
+              <h3>Новый слот теории</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="theory-course">Курс</label><select id="theory-course" name="CourseId" required></select></div>
+                <input id="theory-topic" name="TopicId" type="hidden" value="1" required>
+                <div class="form-row form-row-full">
+                  <label>Тема</label>
+                  <div class="topic-picker" id="theory-topic-picker"></div>
+                </div>
+                <div class="form-row"><label for="theory-start">Начало</label><input id="theory-start" name="StartDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="theory-end">Окончание</label><input id="theory-end" name="EndDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="theory-max">Мест</label><input id="theory-max" name="MaxStudents" type="number" min="1" value="20" required></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Добавить теорию</button></div>
+            </form>
+            <div class="management-board" id="instructor-theory-lessons"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="driving">
+          <div class="student-section-head">
+            <div>
+              <h2>Вождение</h2>
+              <p>Добавляйте практические занятия в свое расписание. Сервер проверит пересечение по времени.</p>
+            </div>
+          </div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="instructor-driving-form">
+              <h3>Новое занятие по вождению</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="driving-course">Курс</label><select id="driving-course" name="CourseId" required></select></div>
+                <div class="form-row"><label for="driving-title">Название</label><input id="driving-title" name="Title" value="Практическое занятие" required></div>
+                <div class="form-row"><label for="driving-start">Начало</label><input id="driving-start" name="StartDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="driving-end">Окончание</label><input id="driving-end" name="EndDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="driving-max">Мест</label><input id="driving-max" name="MaxStudents" type="number" min="1" value="1" required></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Добавить вождение</button></div>
+            </form>
+            <div class="management-board" id="instructor-driving-lessons"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="results">
+          <div class="student-section-head">
+            <div>
+              <h2>Результаты</h2>
+              <p>По каждому студенту можно отметить только результат занятия: прошел или не прошел. Для практики можно указать часы.</p>
+            </div>
+          </div>
+          <div class="management-board" id="instructor-results"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js?v=5"></script>
+  <script src="js/instructor.js?v=18"></script>
+</body>
+</html>

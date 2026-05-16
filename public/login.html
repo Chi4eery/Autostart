@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">АвтоСтарт</a>
+    <nav class="site-nav">
+      <a href="index.html">Главная</a>
+      <a href="index.html#courses">Курсы</a>
+      <a href="index.html#instructors">Инструкторы</a>
+      <a href="index.html#steps">Обучение</a>
+    </nav>
+    <div class="user-area">
+      <a class="button" href="dashboard.html" data-cabinet-link hidden>Личный кабинет</a>
+      <button class="secondary" data-logout hidden>Выйти</button>
+    </div>
+  </header>
+
+  <main class="page auth-page">
+    <p id="auth-message" class="message auth-message" aria-live="polite"></p>
+
+    <section class="panel auth-card" id="login-panel">
+      <p class="eyebrow">Личный кабинет</p>
+      <h1>Войти</h1>
+      <p class="auth-lead">Введите email и пароль, чтобы открыть свой кабинет.</p>
+
+      <form id="login-form" class="auth-form">
+        <div class="form-grid auth-form-grid">
+          <div class="form-row">
+            <label for="login-email">Email</label>
+            <input id="login-email" name="email" type="text" inputmode="email" autocomplete="username" required>
+          </div>
+          <div class="form-row">
+            <label for="login-password">Пароль</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+          </div>
+        </div>
+        <div class="form-actions auth-actions">
+          <button type="submit">Войти</button>
+        </div>
+      </form>
+
+      <div class="auth-switch">
+        <span>Нет аккаунта?</span>
+        <button type="button" class="secondary" data-show-register>Зарегистрироваться</button>
+      </div>
+    </section>
+
+    <section class="panel auth-card register-card" id="register-panel" hidden>
+      <p class="eyebrow">Новая заявка</p>
+      <h1>Регистрация</h1>
+      <p class="auth-lead">Создайте аккаунт заявителя. После этого можно отправить заявку на обучение.</p>
+
+      <form id="register-form" class="auth-form">
+        <div class="form-grid auth-form-grid">
+          <div class="form-row">
+            <label for="register-first-name">Имя</label>
+            <input id="register-first-name" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-row">
+            <label for="register-last-name">Фамилия</label>
+            <input id="register-last-name" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+          <div class="form-row">
+            <label for="register-phone">Телефон</label>
+            <input id="register-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="form-row">
+            <label for="register-email">Email</label>
+            <input id="register-email" name="email" type="text" inputmode="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="register-password">Пароль</label>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="6" required>
+          </div>
+        </div>
+        <div class="form-actions auth-actions">
+          <button type="submit">Создать аккаунт</button>
+        </div>
+      </form>
+
+      <div class="auth-switch">
+        <span>Уже есть аккаунт?</span>
+        <button type="button" class="secondary" data-show-login>Войти</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/api.js?v=5"></script>
+  <script src="js/auth.js?v=5"></script>
+</body>
+</html>

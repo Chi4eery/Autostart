@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заявка на обучение - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">АвтоСтарт</a>
+    <nav class="site-nav">
+      <a href="index.html">Главная</a>
+      <a href="index.html#courses">Курсы</a>
+      <a href="index.html#instructors">Инструкторы</a>
+      <a href="index.html#steps">Обучение</a>
+    </nav>
+    <div class="user-area">
+      <a class="button secondary" href="login.html" data-auth-link>Войти</a>
+      <a class="button" href="dashboard.html" data-cabinet-link hidden>Личный кабинет</a>
+      <button class="secondary" data-logout hidden>Выйти</button>
+    </div>
+  </header>
+
+  <main class="page enrollment-page">
+    <section class="summary-card enrollment-hero">
+      <div>
+        <p class="eyebrow">Заявка на обучение</p>
+        <h1>Начните обучение в АвтоСтарт</h1>
+        <p>Заявка фиксирует выбранную программу. Договор и оплата оформляются администратором отдельно после связи с вами.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <strong>1</strong>
+          <span>регистрация</span>
+        </div>
+        <div class="stat-card">
+          <strong>2</strong>
+          <span>заявка</span>
+        </div>
+        <div class="stat-card">
+          <strong>3</strong>
+          <span>зачисление</span>
+        </div>
+      </div>
+    </section>
+
+    <p id="enrollment-page-message" class="message"></p>
+
+    <section class="split" id="guest-enrollment" hidden>
+      <div class="panel">
+        <p class="eyebrow">Требуется аккаунт</p>
+        <h2>Чтобы оставить заявку, нужно зарегистрироваться</h2>
+        <p>Так администратор сможет увидеть ваши контактные данные, обработать заявку и отправить уведомление в личный кабинет.</p>
+        <div class="form-actions">
+          <a class="button" href="login.html#register">Зарегистрироваться</a>
+          <a class="button secondary" href="login.html">Уже есть аккаунт</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Что будет после регистрации</h2>
+        <div class="list">
+          <div class="list-item">
+            <strong>Вы получите роль заявителя</strong>
+            <span class="meta">На этом этапе расписание и материалы еще закрыты.</span>
+          </div>
+          <div class="list-item">
+            <strong>Выберите курс и отправьте заявку</strong>
+            <span class="meta">ФИО, телефон и email будут взяты из вашего аккаунта.</span>
+          </div>
+          <div class="list-item">
+            <strong>Администратор свяжется с вами</strong>
+            <span class="meta">После оформления договора доступ к обучению откроют вручную.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="split" id="authorized-enrollment" hidden>
+      <div class="panel">
+        <p class="eyebrow">Вы авторизованы</p>
+        <h2>Отправить заявку</h2>
+        <p>Выберите курс и при необходимости оставьте комментарий. Контактные данные подставятся из вашего профиля.</p>
+
+        <form id="enrollment-page-form" class="enrollment-form">
+          <div class="form-grid auth-form-grid">
+            <div class="form-row">
+              <label for="page-enrollment-course">Курс</label>
+              <select id="page-enrollment-course" name="CourseId" required></select>
+            </div>
+            <div class="form-row">
+              <label for="page-enrollment-comment">Комментарий</label>
+              <textarea id="page-enrollment-comment" name="Comment" placeholder="Удобное время звонка или вопрос по программе"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit">Отправить заявку</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Ваши данные для связи</h2>
+        <div class="list" id="enrollment-profile">
+          <div class="empty">Загрузка профиля...</div>
+        </div>
+        <p class="meta">Если данные изменились, сообщите администратору при звонке.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/api.js?v=5"></script>
+  <script src="js/enrollment.js?v=1"></script>
+</body>
+</html>

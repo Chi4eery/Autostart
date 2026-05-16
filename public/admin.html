@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кабинет администратора - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=18">
+</head>
+<body class="student-app-body">
+  <div class="student-app">
+    <aside class="student-sidebar" id="admin-sidebar">
+      <div class="student-sidebar-top">
+        <a class="brand" href="index.html">АвтоСтарт</a>
+        <span class="student-role">Администратор</span>
+      </div>
+
+      <nav class="student-menu" aria-label="Разделы администратора">
+        <button class="student-menu-item active" type="button" data-section-target="students">Студенты</button>
+        <button class="student-menu-item" type="button" data-section-target="schedule">Расписание</button>
+        <button class="student-menu-item" type="button" data-section-target="lessons">Занятия</button>
+        <button class="student-menu-item" type="button" data-section-target="results">Результаты</button>
+        <button class="student-menu-item" type="button" data-section-target="users">Пользователи</button>
+        <button class="student-menu-item" type="button" data-section-target="instructors">Инструкторы</button>
+        <button class="student-menu-item" type="button" data-section-target="courses">Курсы</button>
+        <button class="student-menu-item" type="button" data-section-target="requests">Заявки</button>
+        <button class="student-menu-item" type="button" data-section-target="materials">Материалы</button>
+        <button class="student-menu-item" type="button" data-section-target="notifications">Уведомления</button>
+      </nav>
+
+      <div class="student-sidebar-actions">
+        <a class="button secondary" href="index.html">На главную</a>
+        <button class="secondary" type="button" data-logout>Выйти</button>
+      </div>
+    </aside>
+
+    <div class="student-workspace">
+      <header class="student-topbar">
+        <button class="student-menu-toggle secondary" type="button" data-admin-menu-toggle>Меню</button>
+        <div>
+          <h1 id="section-title">Студенты</h1>
+          <p id="section-description">Список обучающихся, их контакты, активные записи и результаты занятий.</p>
+        </div>
+        <div class="student-topbar-user">
+          <div>
+            <strong id="admin-name">Администратор</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="student-content">
+        <p id="admin-message" class="message"></p>
+
+        <section class="student-section active" data-section="students">
+          <div class="student-section-head">
+            <div>
+              <h2>Студенты</h2>
+              <p>Список обучающихся, их контакты, активные записи и результаты занятий.</p>
+            </div>
+          </div>
+          <div class="management-board" id="students-board"></div>
+        </section>
+
+        <section class="student-section" data-section="schedule">
+          <div class="student-section-head">
+            <div>
+              <h2>Расписание</h2>
+              <p>Единая лента ближайших занятий автошколы по дате и времени.</p>
+            </div>
+          </div>
+          <div class="student-calendar" id="admin-calendar"></div>
+        </section>
+
+        <section class="student-section" data-section="lessons">
+          <div class="student-section-head">
+            <div>
+              <h2>Занятия</h2>
+              <p>Создание, редактирование и удаление теории, практики и экзаменов.</p>
+            </div>
+          </div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="lesson-form">
+              <input type="hidden" name="Id" id="lesson-id">
+              <h3>Занятие</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="lesson-course">Курс</label><select id="lesson-course" name="CourseId" required></select></div>
+                <div class="form-row"><label for="lesson-instructor">Инструктор</label><select id="lesson-instructor" name="InstructorId"></select></div>
+                <div class="form-row"><label for="lesson-theory-topic">Тема теории</label><select id="lesson-theory-topic" name="TheoryTopicId"></select></div>
+                <div class="form-row"><label for="lesson-title">Название</label><input id="lesson-title" name="Title" required></div>
+                <div class="form-row">
+                  <label for="lesson-type">Тип</label>
+                  <select id="lesson-type" name="LessonType" required>
+                    <option value="theory">Теория</option>
+                    <option value="practice">Практика</option>
+                    <option value="exam">Экзамен</option>
+                  </select>
+                </div>
+                <div class="form-row"><label for="lesson-start">Начало</label><input id="lesson-start" name="StartDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="lesson-end">Окончание</label><input id="lesson-end" name="EndDateTime" type="datetime-local" required></div>
+                <div class="form-row"><label for="lesson-max">Мест</label><input id="lesson-max" name="MaxStudents" type="number" min="1" value="1" required></div>
+                <div class="form-row">
+                  <label for="lesson-status">Статус</label>
+                  <select id="lesson-status" name="Status">
+                    <option value="available">Доступно</option>
+                    <option value="full">Мест нет</option>
+                    <option value="cancelled">Отменено</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-toolbar">
+                <button type="submit">Сохранить</button>
+                <button type="button" class="secondary" data-reset-form="lesson-form">Очистить</button>
+              </div>
+            </form>
+            <div class="management-board" id="lessons-board"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="results">
+          <div class="student-section-head">
+            <div>
+              <h2>Результаты занятий</h2>
+              <p>Отметка по каждой записи: прошел, не прошел или не отмечено. Для практики можно указать часы.</p>
+            </div>
+          </div>
+          <div class="management-board" id="results-board"></div>
+        </section>
+
+        <section class="student-section" data-section="users">
+          <div class="student-section-head"><div><h2>Пользователи</h2><p>Редактирование контактов и ролей.</p></div></div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="user-form">
+              <input type="hidden" name="Id" id="user-id">
+              <h3>Пользователь</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="user-first-name">Имя</label><input id="user-first-name" name="FirstName" required></div>
+                <div class="form-row"><label for="user-last-name">Фамилия</label><input id="user-last-name" name="LastName" required></div>
+                <div class="form-row"><label for="user-phone">Телефон</label><input id="user-phone" name="Phone"></div>
+                <div class="form-row"><label for="user-email">Email</label><input id="user-email" name="Email" required></div>
+                <div class="form-row"><label for="user-role">Роль</label><select id="user-role" name="RoleId" required></select></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Сохранить</button><button type="button" class="secondary" data-reset-form="user-form">Очистить</button></div>
+            </form>
+            <div class="management-board" id="users-board"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="instructors">
+          <div class="student-section-head"><div><h2>Инструкторы</h2><p>Профили инструкторов и контактные данные.</p></div></div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="instructor-form">
+              <input type="hidden" name="Id" id="instructor-id">
+              <h3>Инструктор</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="instructor-user">Пользователь</label><select id="instructor-user" name="UserId" required></select></div>
+                <div class="form-row"><label for="instructor-category">Категория</label><input id="instructor-category" name="Category" placeholder="B"></div>
+                <div class="form-row"><label for="instructor-experience">Опыт, лет</label><input id="instructor-experience" name="ExperienceYears" type="number" min="0"></div>
+                <div class="form-row"><label for="instructor-description">Описание</label><textarea id="instructor-description" name="Description"></textarea></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Сохранить</button><button type="button" class="secondary" data-reset-form="instructor-form">Очистить</button></div>
+            </form>
+            <div class="management-board" id="instructors-board"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="courses">
+          <div class="student-section-head"><div><h2>Курсы</h2><p>Программы обучения и стоимость.</p></div></div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="course-form">
+              <input type="hidden" name="Id" id="course-id">
+              <h3>Курс</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="course-title">Название</label><input id="course-title" name="Title" required></div>
+                <div class="form-row"><label for="course-price">Стоимость</label><input id="course-price" name="Price" type="number" min="0" step="100"></div>
+                <div class="form-row"><label for="course-duration">Длительность</label><input id="course-duration" name="Duration"></div>
+                <div class="form-row"><label for="course-required-driving-hours">Часы вождения</label><input id="course-required-driving-hours" name="RequiredDrivingHours" type="number" min="0" step="1"></div>
+                <div class="form-row"><label for="course-description">Описание</label><textarea id="course-description" name="Description"></textarea></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Сохранить</button><button type="button" class="secondary" data-reset-form="course-form">Очистить</button></div>
+            </form>
+            <div class="management-board" id="courses-board"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="requests">
+          <div class="student-section-head"><div><h2>Заявки на обучение</h2><p>Обработка заявок и перевод заявителя в обучение выполняются администратором.</p></div></div>
+          <div class="management-board" id="requests-board"></div>
+        </section>
+
+        <section class="student-section" data-section="materials">
+          <div class="student-section-head"><div><h2>Материалы</h2><p>Учебные ссылки и файлы.</p></div></div>
+          <div class="management-layout">
+            <form class="student-panel admin-form" id="material-form">
+              <input type="hidden" name="Id" id="material-id">
+              <h3>Материал</h3>
+              <div class="form-grid">
+                <div class="form-row"><label for="material-course">Курс</label><select id="material-course" name="CourseId"></select></div>
+                <div class="form-row"><label for="material-title">Название</label><input id="material-title" name="Title" required></div>
+                <div class="form-row"><label for="material-url">Ссылка</label><input id="material-url" name="FileUrl"></div>
+                <div class="form-row"><label for="material-description">Описание</label><textarea id="material-description" name="Description"></textarea></div>
+              </div>
+              <div class="form-toolbar"><button type="submit">Сохранить</button><button type="button" class="secondary" data-reset-form="material-form">Очистить</button></div>
+            </form>
+            <div class="management-board" id="materials-board"></div>
+          </div>
+        </section>
+
+        <section class="student-section" data-section="notifications">
+          <div class="student-section-head"><div><h2>Уведомления</h2><p>Отправка сообщений пользователям внутри сайта.</p></div></div>
+          <form class="student-panel admin-form" id="notification-form">
+            <h3>Новое уведомление</h3>
+            <div class="form-grid">
+              <div class="form-row"><label for="notification-user">Пользователь</label><select id="notification-user" name="UserId" required></select></div>
+              <div class="form-row"><label for="notification-title">Заголовок</label><input id="notification-title" name="Title" required></div>
+              <div class="form-row"><label for="notification-channel">Канал</label><select id="notification-channel" name="Channel"><option value="site">site</option><option value="email">email</option><option value="vk">vk</option></select></div>
+              <div class="form-row"><label for="notification-message">Текст</label><textarea id="notification-message" name="Message" required></textarea></div>
+            </div>
+            <div class="form-toolbar"><button type="submit">Отправить</button></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js?v=5"></script>
+  <script src="js/admin.js?v=19"></script>
+</body>
+</html>

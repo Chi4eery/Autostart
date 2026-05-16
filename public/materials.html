@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Материалы — АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">АвтоСтарт</a>
+    <nav class="site-nav">
+      <a href="index.html">Главная</a>
+      <a href="index.html#courses">Курсы</a>
+      <a href="index.html#instructors">Инструкторы</a>
+      <a href="index.html#steps">Обучение</a>
+    </nav>
+    <div class="user-area">
+      <a class="button" href="dashboard.html" data-cabinet-link hidden>Личный кабинет</a>
+      <button class="secondary" data-logout hidden>Выйти</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="summary-card">
+      <p class="eyebrow">Библиотека</p>
+      <h1>Учебные материалы</h1>
+      <p>Конспекты, памятки и полезные ссылки для подготовки к теории, практике и экзамену.</p>
+    </section>
+
+    <p id="materials-message" class="message"></p>
+
+    <section class="grid" id="materials-list">
+      <div class="empty">Загрузка материалов...</div>
+    </section>
+  </main>
+
+  <script src="js/api.js?v=4"></script>
+  <script src="js/materials.js?v=4"></script>
+</body>
+</html>
