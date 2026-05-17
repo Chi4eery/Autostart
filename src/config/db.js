@@ -15,7 +15,18 @@ function parseServer(value) {
 }
 
 const trustedConnection = parseBoolean(process.env.DB_TRUSTED_CONNECTION);
-const sql = trustedConnection ? require('mssql/msnodesqlv8') : require('mssql');
+let sql = require('mssql');
+
+if (trustedConnection) {
+  try {
+    sql = require('mssql/msnodesqlv8');
+  } catch (error) {
+    throw new Error(
+      'DB_TRUSTED_CONNECTION=true requires the optional msnodesqlv8 driver. ' +
+      'Install it locally on Windows or set DB_TRUSTED_CONNECTION=false for SQL Server authentication.'
+    );
+  }
+}
 const databaseName = process.env.DB_DATABASE || 'AutoSchoolDB';
 const parsedServer = parseServer(process.env.DB_SERVER);
 
