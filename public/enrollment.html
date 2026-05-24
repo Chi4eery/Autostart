@@ -8,13 +8,10 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">АвтоСтарт</a>
-    <nav class="site-nav">
-      <a href="index.html">Главная</a>
-      <a href="index.html#courses">Курсы</a>
-      <a href="index.html#instructors">Инструкторы</a>
-      <a href="index.html#steps">Обучение</a>
-    </nav>
+    <div class="header-brand-group">
+      <a class="brand" href="index.html">АвтоСтарт</a>
+      <span class="header-address">Красноярск, ул. Московская, 40</span>
+    </div>
     <div class="user-area">
       <a class="button secondary" href="login.html" data-auth-link>Войти</a>
       <a class="button" href="dashboard.html" data-cabinet-link hidden>Личный кабинет</a>
@@ -23,58 +20,68 @@
   </header>
 
   <main class="page enrollment-page">
-    <section class="summary-card enrollment-hero">
-      <div>
-        <p class="eyebrow">Заявка на обучение</p>
-        <h1>Начните обучение в АвтоСтарт</h1>
-        <p>Заявка фиксирует выбранную программу. Договор и оплата оформляются администратором отдельно после связи с вами.</p>
+    <section class="enrollment-hero">
+      <div class="enrollment-hero-copy">
+        <h1>Оставьте заявку на обучение</h1>
+        <p>Чтобы подать заявку, нужно зарегистрироваться. После этого вы сможете выбрать курс, отправить данные и дождаться подтверждения от администратора.</p>
       </div>
-      <div class="stat-grid">
-        <div class="stat-card">
-          <strong>1</strong>
-          <span>регистрация</span>
+      <div class="enrollment-stepper" aria-label="Путь подачи заявки">
+        <div class="enrollment-step is-active">
+          <span>1</span>
+          <strong>Регистрация</strong>
         </div>
-        <div class="stat-card">
-          <strong>2</strong>
-          <span>заявка</span>
+        <div class="enrollment-step">
+          <span>2</span>
+          <strong>Заявка</strong>
         </div>
-        <div class="stat-card">
-          <strong>3</strong>
-          <span>зачисление</span>
+        <div class="enrollment-step">
+          <span>3</span>
+          <strong>Подтверждение и зачисление</strong>
         </div>
       </div>
     </section>
 
     <p id="enrollment-page-message" class="message"></p>
 
-    <section class="split" id="guest-enrollment" hidden>
-      <div class="panel">
-        <p class="eyebrow">Требуется аккаунт</p>
+    <section class="enrollment-guest-layout" id="guest-enrollment" hidden>
+      <div class="enrollment-primary-panel">
         <h2>Чтобы оставить заявку, нужно зарегистрироваться</h2>
-        <p>Так администратор сможет увидеть ваши контактные данные, обработать заявку и отправить уведомление в личный кабинет.</p>
-        <div class="form-actions">
+        <p>Регистрация нужна для того, чтобы администратор мог обработать заявку, а вы получили доступ к уведомлениям и статусу обращения в системе.</p>
+
+        <div class="enrollment-benefits">
+          <span>Контактные данные сохраняются в аккаунте</span>
+          <span>Заявка отправляется быстрее</span>
+          <span>Статус и уведомления доступны в личном кабинете</span>
+        </div>
+
+        <div class="form-actions enrollment-actions">
           <a class="button" href="login.html#register">Зарегистрироваться</a>
           <a class="button secondary" href="login.html">Уже есть аккаунт</a>
         </div>
       </div>
 
-      <div class="panel">
-        <h2>Что будет после регистрации</h2>
-        <div class="list">
-          <div class="list-item">
+      <aside class="enrollment-next-panel">
+        <h2>Что произойдет после регистрации</h2>
+        <div class="enrollment-next-list">
+          <article>
+            <span></span>
             <strong>Вы получите роль заявителя</strong>
-            <span class="meta">На этом этапе расписание и материалы еще закрыты.</span>
-          </div>
-          <div class="list-item">
+            <p>На этом этапе учебные разделы еще недоступны.</p>
+          </article>
+          <article>
+            <span></span>
             <strong>Выберите курс и отправьте заявку</strong>
-            <span class="meta">ФИО, телефон и email будут взяты из вашего аккаунта.</span>
-          </div>
-          <div class="list-item">
+            <p>Контактные данные будут взяты из вашего аккаунта.</p>
+          </article>
+          <article>
+            <span></span>
             <strong>Администратор свяжется с вами</strong>
-            <span class="meta">После оформления договора доступ к обучению откроют вручную.</span>
-          </div>
+            <p>После оформления договора доступ к обучению откроют вручную.</p>
+          </article>
         </div>
-      </div>
+      </aside>
+
+      <p class="enrollment-note">Договор и оплата оформляются после связи с администратором. Онлайн-оплата на сайте не используется.</p>
     </section>
 
     <section class="split" id="authorized-enrollment" hidden>

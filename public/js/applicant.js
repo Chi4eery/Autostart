@@ -17,12 +17,30 @@ const state = {
   notifications: []
 };
 
+function selectedCourseId() {
+  return new URLSearchParams(window.location.search).get('courseId') || '';
+}
+
 function fillProfile() {
   const user = getCurrentUser();
   const nameElement = document.querySelector('#applicant-name');
+  const contactSummary = document.querySelector('#applicant-contact-summary');
 
   if (nameElement && user) {
-    nameElement.textContent = `${user.firstName} ${user.lastName}`;
+    const firstName = user.firstName || '';
+    nameElement.textContent = firstName
+      ? `${firstName}, осталось отправить заявку`
+      : 'Осталось отправить заявку';
+  }
+
+  if (contactSummary && user) {
+    const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'ФИО не указано';
+    contactSummary.innerHTML = `
+      <span>Контакты:</span>
+      <strong>${escapeHtml(fullName)}</strong>
+      <strong>${escapeHtml(user.phone || 'Телефон не указан')}</strong>
+      <strong>${escapeHtml(user.email || 'Email не указан')}</strong>
+    `;
   }
 }
 
@@ -33,18 +51,21 @@ function fillCourses() {
     return;
   }
 
-  select.innerHTML = '<option value="">Выберите курс</option>' + state.courses.map((course) => (
-    `<option value="${escapeHtml(course.Id)}">${escapeHtml(course.Title)} · ${money(course.Price)}</option>`
-  )).join('');
+  const selected = selectedCourseId();
+  select.innerHTML = '<option value="">Выберите курс</option>' + state.courses.map((course) => {
+    const isSelected = String(course.Id) === String(selected) ? ' selected' : '';
+    return `<option value="${escapeHtml(course.Id)}"${isSelected}>${escapeHtml(course.Title)} · ${money(course.Price)}</option>`;
+  }).join('');
 }
 
 function renderStats() {
   const latest = state.requests[0];
-  const unread = state.notifications.filter((notification) => !notification.IsRead).length;
+  const statusElement = document.querySelector('#applicant-request-status');
 
-  document.querySelector('#stat-requests').textContent = String(state.requests.length);
-  document.querySelector('#stat-latest').textContent = latest ? statusLabel(latest.Status) : 'Нет заявки';
-  document.querySelector('#stat-notifications').textContent = String(unread);
+  if (statusElement) {
+    statusElement.textContent = latest ? 'Заявка отправлена' : 'Отправьте заявку';
+    statusElement.classList.toggle('is-complete', Boolean(latest));
+  }
 }
 
 function renderRequests() {
@@ -66,7 +87,7 @@ function renderRequests() {
           <h3>${escapeHtml(request.CourseTitle)}</h3>
           <div class="meta">${escapeHtml(request.CourseDuration || 'Срок уточняется')} · ${money(request.CoursePrice)}</div>
         </div>
-        <span class="status ${escapeHtml(request.Status)}">${escapeHtml(statusLabel(request.Status))}</span>
+        <span class="applicant-request-status-text">${escapeHtml(statusLabel(request.Status))}</span>
       </div>
       <p>${escapeHtml(request.Comment || 'Комментарий не указан.')}</p>
       <div class="meta">${formatDateTime(request.CreatedAt)}</div>
@@ -88,13 +109,12 @@ function renderNotifications() {
   }
 
   container.innerHTML = visible.map((notification) => `
-    <article class="list-item notification-card">
-      <div class="card-header">
+    <article class="applicant-notification-item ${notification.IsRead ? 'is-read' : 'is-unread'}">
+      <div>
         <h3>${escapeHtml(notification.Title)}</h3>
-        <span class="status ${notification.IsRead ? 'read' : 'unread'}">${notification.IsRead ? 'Прочитано' : 'Новое'}</span>
+        <p>${escapeHtml(notification.Message)}</p>
       </div>
-      <p>${escapeHtml(notification.Message)}</p>
-      <div class="meta">${formatDateTime(notification.CreatedAt)}</div>
+      <time>${formatDateTime(notification.CreatedAt)}</time>
     </article>
   `).join('');
 }
@@ -126,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const message = document.querySelector('#applicant-message');
+  fillProfile();
 
   loadApplicant().catch((error) => {
     setMessage(message, error.message, 'error');

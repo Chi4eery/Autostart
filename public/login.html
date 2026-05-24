@@ -8,13 +8,10 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">АвтоСтарт</a>
-    <nav class="site-nav">
-      <a href="index.html">Главная</a>
-      <a href="index.html#courses">Курсы</a>
-      <a href="index.html#instructors">Инструкторы</a>
-      <a href="index.html#steps">Обучение</a>
-    </nav>
+    <div class="header-brand-group">
+      <a class="brand" href="index.html">АвтоСтарт</a>
+      <span class="header-address">Красноярск, ул. Московская, 40</span>
+    </div>
     <div class="user-area">
       <a class="button" href="dashboard.html" data-cabinet-link hidden>Личный кабинет</a>
       <button class="secondary" data-logout hidden>Выйти</button>
@@ -25,7 +22,6 @@
     <p id="auth-message" class="message auth-message" aria-live="polite"></p>
 
     <section class="panel auth-card" id="login-panel">
-      <p class="eyebrow">Личный кабинет</p>
       <h1>Войти</h1>
       <p class="auth-lead">Введите email и пароль, чтобы открыть свой кабинет.</p>
 
@@ -52,7 +48,6 @@
     </section>
 
     <section class="panel auth-card register-card" id="register-panel" hidden>
-      <p class="eyebrow">Новая заявка</p>
       <h1>Регистрация</h1>
       <p class="auth-lead">Создайте аккаунт заявителя. После этого можно отправить заявку на обучение.</p>
 

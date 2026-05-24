@@ -1,5 +1,5 @@
 (function () {
-const { apiRequest, escapeHtml, money } = window.AutoSchool;
+const { apiRequest, escapeHtml, getCurrentUser, money } = window.AutoSchool;
 
 function renderCourses(courses) {
   const container = document.querySelector('#courses-list');
@@ -16,26 +16,25 @@ function renderCourses(courses) {
   container.innerHTML = courses.map((course) => {
     const title = String(course.Title || '');
     const isRefresh = title.toLowerCase().includes('восстанов');
-    const badge = isRefresh ? 'Для водителей с опытом' : 'Основная программа';
     const fallbackDescription = isRefresh
       ? 'Индивидуальные занятия для тех, кто хочет вернуть уверенность за рулем, отработать город, парковку и сложные маневры.'
-      : 'Полный курс подготовки водителей легковых автомобилей: теория, учебные материалы и практические занятия с инструктором.';
+      : 'Полный курс подготовки водителей легковых автомобилей: теория, практика и подготовка к экзаменационному маршруту.';
+    const description = String(course.Description || fallbackDescription)
+      .replace('теория, тренажер и практика', 'теория, практика и подготовка к экзаменационному маршруту');
     const details = isRefresh
       ? ['Формат: практика с инструктором', 'Подходит: после перерыва в вождении']
-      : ['Формат: теория + практика', 'Доступ после зачисления: расписание, материалы, уведомления'];
+      : ['Формат: теория + практика', 'В кабинете видно расписание, материалы и важные сообщения'];
 
     return `
     <article class="course-offer-card">
-      <div class="offer-badge">${escapeHtml(badge)}</div>
       <h3>${escapeHtml(course.Title)}</h3>
-      <p>${escapeHtml(course.Description || fallbackDescription)}</p>
+      <p>${escapeHtml(description)}</p>
       <ul class="offer-list">
         <li>Срок: ${escapeHtml(course.Duration || 'уточняется')}</li>
         ${details.map((detail) => `<li>${escapeHtml(detail)}</li>`).join('')}
       </ul>
       <div class="offer-footer">
         <span class="price">${money(course.Price)}</span>
-        <span class="status new">${escapeHtml(course.Duration || 'срок уточняется')}</span>
       </div>
       <div class="card-actions">
         <button type="button" data-open-enrollment data-course-id="${escapeHtml(course.Id)}">Оставить заявку</button>
@@ -45,8 +44,35 @@ function renderCourses(courses) {
   }).join('');
 }
 
+function formatYears(value) {
+  const years = Number(value) || 0;
+  const lastTwo = years % 100;
+  const last = years % 10;
+
+  if (lastTwo >= 11 && lastTwo <= 14) {
+    return `${years} лет`;
+  }
+
+  if (last === 1) {
+    return `${years} год`;
+  }
+
+  if (last >= 2 && last <= 4) {
+    return `${years} года`;
+  }
+
+  return `${years} лет`;
+}
+
 function openEnrollmentPage(courseId = '') {
   const query = courseId ? `?courseId=${encodeURIComponent(courseId)}` : '';
+  const user = getCurrentUser();
+
+  if (user?.role === 'Applicant') {
+    window.location.href = `applicant.html${query}`;
+    return;
+  }
+
   window.location.href = `enrollment.html${query}`;
 }
 
@@ -67,9 +93,9 @@ function renderInstructors(instructors) {
       <div class="instructor-avatar">${escapeHtml((instructor.FirstName || 'И').slice(0, 1))}</div>
       <h3>${escapeHtml(instructor.FirstName)} ${escapeHtml(instructor.LastName)}</h3>
       <p>${escapeHtml(instructor.Description || 'Инструктор автошколы АвтоСтарт.')}</p>
-      <div class="badge-row">
-        <span class="status available">Категория: ${escapeHtml(instructor.Category || 'не указана')}</span>
-        <span class="status new">Опыт: ${escapeHtml(instructor.ExperienceYears || 0)} лет</span>
+      <div class="instructor-meta">
+        <span>Категория: ${escapeHtml(instructor.Category || 'не указана')}</span>
+        <span>Опыт: ${escapeHtml(formatYears(instructor.ExperienceYears))}</span>
       </div>
     </article>
   `).join('');

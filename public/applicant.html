@@ -3,130 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Кабинет заявителя — АвтоСтарт</title>
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <title>Кабинет заявителя - АвтоСтарт</title>
+  <link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">АвтоСтарт</a>
-    <nav class="site-nav">
-      <a href="index.html">Главная</a>
-      <a href="index.html#courses">Курсы</a>
-      <a href="index.html#instructors">Инструкторы</a>
-      <a href="index.html#steps">Обучение</a>
-    </nav>
+    <div class="header-brand-group">
+      <a class="brand" href="index.html">АвтоСтарт</a>
+      <span class="header-address">Красноярск, ул. Московская, 40</span>
+    </div>
     <div class="user-area">
       <a class="button" href="applicant.html" data-cabinet-link hidden>Личный кабинет</a>
       <button class="secondary" data-logout hidden>Выйти</button>
     </div>
   </header>
 
-  <main class="page">
-    <section class="dashboard-hero">
-      <div class="summary-card">
-        <p class="eyebrow">Кабинет заявителя</p>
-        <h1>Здравствуйте, <span id="applicant-name">заявитель</span></h1>
-        <p>Вы зарегистрированы в системе, но доступ к расписанию и учебным материалам откроется после подтверждения администратором.</p>
+  <main class="page applicant-page">
+    <section class="applicant-hero">
+      <div class="applicant-hero-copy">
+        <h1><span id="applicant-name">Осталось отправить заявку</span></h1>
+        <p>Аккаунт уже создан. Выберите программу обучения и отправьте заявку - администратор свяжется с вами для оформления.</p>
       </div>
-      <div class="panel">
-        <h2>Статус доступа</h2>
-        <div class="stat-grid">
-          <div class="stat-card">
-            <strong id="stat-requests">0</strong>
-            <span>заявок на обучение</span>
-          </div>
-          <div class="stat-card">
-            <strong id="stat-latest">Новая</strong>
-            <span>последний статус</span>
-          </div>
-          <div class="stat-card">
-            <strong id="stat-notifications">0</strong>
-            <span>новых уведомлений</span>
-          </div>
-        </div>
+      <div class="applicant-path" aria-label="Путь заявителя">
+        <span class="is-complete">Аккаунт создан</span>
+        <span id="applicant-request-status">Отправьте заявку</span>
+        <span class="is-locked">Обучение откроется после подтверждения</span>
       </div>
     </section>
 
     <p id="applicant-message" class="message"></p>
 
-    <section class="split">
-      <div class="panel">
+    <section class="applicant-main-layout">
+      <div class="applicant-request-card">
         <div class="section-head">
           <div>
-            <h2>Оставить заявку</h2>
-            <p>Выберите курс. После обработки заявки администратор свяжется с вами для договора и оплаты вне системы.</p>
+            <h2>Заявка на обучение</h2>
+            <p>Выберите курс и при необходимости оставьте комментарий для администратора.</p>
           </div>
         </div>
-        <form id="applicant-request-form">
+
+        <div class="applicant-contact-summary" id="applicant-contact-summary">
+          <span>Контактные данные взяты из аккаунта</span>
+          <div class="empty">Загрузка данных...</div>
+        </div>
+
+        <form id="applicant-request-form" class="applicant-request-form">
           <div class="form-grid">
-            <div class="form-row">
+            <div class="form-row applicant-course-control">
               <label for="request-course">Курс</label>
               <select id="request-course" name="CourseId" required></select>
+              <button type="submit">Отправить заявку</button>
             </div>
             <div class="form-row">
               <label for="request-comment">Комментарий</label>
               <textarea id="request-comment" name="Comment" placeholder="Удобное время звонка или вопрос по программе"></textarea>
             </div>
           </div>
-          <div class="form-actions">
-            <button type="submit">Отправить заявку</button>
-          </div>
         </form>
       </div>
 
-      <div class="panel">
-        <div class="section-head">
-          <div>
-            <h2>Что дальше</h2>
-            <p>Пока заявка не одобрена, запись на практические занятия недоступна.</p>
-          </div>
+      <aside class="applicant-next-card">
+        <h2>Что будет дальше</h2>
+        <div class="applicant-timeline">
+          <article>
+            <span></span>
+            <strong>Заявка отправлена</strong>
+            <p>Выбранный курс и комментарий попадут администратору.</p>
+          </article>
+          <article>
+            <span></span>
+            <strong>Администратор свяжется с вами</strong>
+            <p>Договор и оплата оформляются вне сайта.</p>
+          </article>
+          <article>
+            <span></span>
+            <strong>Откроется учебный кабинет</strong>
+            <p>После подтверждения появится доступ к расписанию, занятиям и материалам.</p>
+          </article>
         </div>
-        <div class="list">
-          <div class="list-item">
-            <strong>1. Заявка</strong>
-            <span class="meta">Вы отправляете заявку на выбранную программу.</span>
-          </div>
-          <div class="list-item">
-            <strong>2. Связь с администратором</strong>
-            <span class="meta">Администратор уточняет детали, договор и оплату вне системы.</span>
-          </div>
-          <div class="list-item">
-            <strong>3. Зачисление</strong>
-            <span class="meta">После подтверждения роль меняется на Student, и открывается расписание.</span>
-          </div>
-        </div>
-      </div>
+        <p class="applicant-lock-note">До подтверждения заявки расписание, материалы и запись на занятия недоступны.</p>
+      </aside>
     </section>
 
-    <section class="split">
-      <div class="panel">
-        <div class="section-head">
-          <div>
-            <h2>Мои заявки</h2>
-            <p>Следите за статусом обработки.</p>
-          </div>
-        </div>
-        <div class="list" id="applicant-requests">
-          <div class="empty">Загрузка заявок...</div>
+    <section class="applicant-activity">
+      <div class="section-head">
+        <div>
+          <h2>Мои заявки и уведомления</h2>
+          <p>Здесь отображаются отправленные заявки и последние сообщения по ним.</p>
         </div>
       </div>
 
-      <div class="panel">
-        <div class="section-head">
-          <div>
-            <h2>Уведомления</h2>
-            <p>Сообщения о статусе заявки.</p>
+      <div class="applicant-activity-grid">
+        <div>
+          <h3>Заявки</h3>
+          <div class="list" id="applicant-requests">
+            <div class="empty">Загрузка заявок...</div>
           </div>
-          <a class="button secondary" href="notifications.html">Все уведомления</a>
         </div>
-        <div class="list" id="applicant-notifications">
-          <div class="empty">Загрузка уведомлений...</div>
+        <div>
+          <h3>Уведомления</h3>
+          <div class="list" id="applicant-notifications">
+            <div class="empty">Загрузка уведомлений...</div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <script src="js/api.js?v=5"></script>
-  <script src="js/applicant.js?v=5"></script>
+  <script src="js/applicant.js?v=6"></script>
 </body>
 </html>

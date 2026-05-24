@@ -73,7 +73,7 @@ END
 IF NOT EXISTS (SELECT 1 FROM dbo.Courses WHERE Title = N'Категория B')
 BEGIN
     INSERT INTO dbo.Courses (Title, Description, Price, Duration, RequiredDrivingHours)
-    VALUES (N'Категория B', N'Полный курс подготовки водителей легковых автомобилей: теория, тренажер и практика.', 42000.00, N'3 месяца', 52);
+    VALUES (N'Категория B', N'Полный курс подготовки водителей легковых автомобилей: теория, практика и подготовка к экзаменационному маршруту.', 42000.00, N'3 месяца', 52);
 END
 ELSE
 BEGIN

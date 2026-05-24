@@ -23,6 +23,10 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isTemporarilyUnavailableCourse(course) {
+  return String(course?.Title || '').toLowerCase().includes('восстанов');
+}
+
 async function createEnrollmentRequest(req, res) {
   try {
     const data = normalizeRequestBody(req.body);
@@ -60,10 +64,16 @@ async function createEnrollmentRequest(req, res) {
 
     const courseResult = await pool.request()
       .input('CourseId', sql.Int, Number(data.CourseId))
-      .query('SELECT Id FROM dbo.Courses WHERE Id = @CourseId');
+      .query('SELECT Id, Title FROM dbo.Courses WHERE Id = @CourseId');
 
     if (courseResult.recordset.length === 0) {
       return res.status(404).json({ message: 'Выбранный курс не найден' });
+    }
+
+    if (isTemporarilyUnavailableCourse(courseResult.recordset[0])) {
+      return res.status(400).json({
+        message: 'Подача заявки на курс восстановления навыков временно недоступна'
+      });
     }
 
     const result = await pool.request()

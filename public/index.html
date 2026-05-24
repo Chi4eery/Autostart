@@ -4,17 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>АвтоСтарт — автошкола</title>
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">АвтоСтарт</a>
-    <div class="site-location" aria-label="Адрес автошколы">
-      <span class="location-dot"></span>
-      <div>
-        <strong>Обучаем в Красноярске</strong>
-        <span>ул. Московская, 40</span>
-      </div>
+    <div class="header-brand-group">
+      <a class="brand" href="index.html">АвтоСтарт</a>
+      <span class="header-address">Красноярск, ул. Московская, 40</span>
     </div>
     <div class="user-area">
       <a class="button secondary" href="login.html" data-auth-link>Войти</a>
@@ -26,51 +22,46 @@
   <section class="hero landing-hero">
     <div class="hero-layout">
       <div class="hero-content">
-        <p class="eyebrow">Спокойный старт в обучении</p>
-        <h1>Учиться водить спокойнее, когда путь понятен</h1>
+        <h1>Путь к правам — по понятным шагам</h1>
         <p class="hero-text">
-          Выберите программу, отправьте заявку и двигайтесь к занятиям по шагам: администратор поможет с оформлением, а всё важное будет под рукой.
+          Выберите курс, отправьте заявку и проходите обучение через личный кабинет: расписание, занятия, уведомления и прогресс доступны в одном месте.
         </p>
         <div class="hero-actions">
           <button type="button" data-open-enrollment>Оставить заявку</button>
           <a class="button secondary" href="#courses">Посмотреть курсы</a>
         </div>
+        <p class="hero-note">После заявки администратор свяжется с вами и откроет доступ к учебному кабинету после оформления.</p>
         <div class="hero-benefits">
           <article class="hero-benefit">
-            <strong>Для тех, кто начинает с нуля</strong>
-            <span>Основная программа подготовки для будущих водителей категории B.</span>
+            <strong>Подача заявки</strong>
+            <span>Вы выбираете курс, заявка попадает администратору.</span>
           </article>
           <article class="hero-benefit">
-            <strong>Понятный путь без лишней суеты</strong>
-            <span>Вы оставляете заявку, а администратор помогает пройти следующие шаги.</span>
+            <strong>Личный кабинет</strong>
+            <span>После зачисления открываются расписание и материалы.</span>
           </article>
           <article class="hero-benefit">
-            <strong>Всё важное в одном месте</strong>
-            <span>После зачисления вы видите расписание, уведомления и материалы по обучению.</span>
+            <strong>Контроль прогресса</strong>
+            <span>Отметки занятий обновляют учебный прогресс.</span>
           </article>
         </div>
       </div>
 
-      <div class="hero-visual landing-visual" aria-hidden="true">
-        <div class="road-card">
-          <div class="road-line"></div>
-          <div class="schedule-card floating-card">
-            <span>Ближайшее занятие</span>
-            <strong>Практика с инструктором</strong>
-            <small>Вт, 18:30 · доступно 2 места</small>
+      <div class="hero-visual landing-visual" aria-label="Учебная машина автошколы">
+        <figure class="training-car-card">
+          <img
+            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=88"
+            alt="Учебная машина на дороге"
+          >
+          <figcaption>
+            <span>Категория B</span>
+            <strong>Практика с инструктором в городских условиях</strong>
+          </figcaption>
+          <div class="training-car-note">
+            <strong>Красноярск</strong>
+            <span>ул. Московская, 40</span>
           </div>
-          <div class="instructor-card-mini floating-card">
-            <span class="avatar-mark">B</span>
-            <div>
-              <strong>Категория B</strong>
-              <small>основная программа обучения</small>
-            </div>
-          </div>
-          <div class="request-card-mini floating-card">
-            <strong>Заявка отправлена</strong>
-            <small>администратор свяжется с вами</small>
-          </div>
-        </div>
+        </figure>
       </div>
     </div>
   </section>
@@ -80,7 +71,6 @@
       <div class="landing-container">
         <div class="section-head section-head-centered">
           <div>
-            <p class="eyebrow">Маршрут обучения</p>
             <h2>От заявки до первого занятия — всё по шагам</h2>
             <p>Сайт помогает пройти путь от выбора курса до записи на практику без лишних звонков и путаницы.</p>
           </div>
@@ -119,11 +109,9 @@
       <div class="landing-container">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Программы</p>
             <h2>Выберите программу обучения</h2>
             <p>Заявка фиксирует ваш интерес к программе. Договор и оплата оформляются администратором отдельно после связи с вами.</p>
           </div>
-          <button type="button" class="secondary" data-open-enrollment>Оставить заявку</button>
         </div>
         <div class="course-offer-grid" id="courses-list">
           <div class="empty">Загрузка курсов...</div>
@@ -133,57 +121,62 @@
     </section>
 
     <section class="landing-section access-section">
-      <div class="landing-container access-layout">
-        <div>
-          <p class="eyebrow">После зачисления</p>
-          <h2>После подтверждения заявки вы получите доступ к обучению</h2>
-          <p class="section-lead">Когда администратор оформит зачисление, роль пользователя изменится на обучающегося, и в кабинете появятся учебные функции.</p>
-          <div class="access-grid">
-            <article class="access-item">
-              <h3>Расписание занятий</h3>
-              <p>Смотрите доступные занятия, дату, время, инструктора и количество мест.</p>
+      <div class="landing-container learning-flow">
+        <div class="learning-flow-copy">
+          <h2>Учебный процесс без лишней путаницы</h2>
+          <p>После подтверждения заявки студент получает доступ к основным учебным разделам. Всё, что связано с занятиями, материалами и прогрессом, собрано в одной системе.</p>
+
+          <div class="learning-flow-accent">
+            <div>
+              <strong>Расписание под рукой</strong>
+              <span>Ближайшие занятия и изменения отображаются внутри сайта.</span>
+            </div>
+            <div>
+              <strong>Понятный путь обучения</strong>
+              <span>Практика, материалы и записи собраны в одном месте.</span>
+            </div>
+            <div>
+              <strong>Прогресс без путаницы</strong>
+              <span>Темы и часы обновляются после отметки занятия.</span>
+            </div>
+          </div>
+
+          <small>Доступ к учебным разделам открывается после оформления обучения администратором.</small>
+        </div>
+
+        <div class="learning-flow-timeline" aria-label="Что происходит после зачисления">
+          <h3>Что происходит после зачисления</h3>
+          <div class="learning-flow-steps">
+            <article>
+              <span></span>
+              <div>
+                <h4>Расписание</h4>
+                <p>Студент видит ближайшие занятия и доступные даты.</p>
+              </div>
             </article>
-            <article class="access-item">
-              <h3>Запись на практику</h3>
-              <p>Записывайтесь на свободные практические занятия и отменяйте запись при необходимости.</p>
+            <article class="is-highlighted">
+              <span></span>
+              <div>
+                <h4>Запись</h4>
+                <p>Выбирает свободную практику и управляет своими записями.</p>
+              </div>
             </article>
-            <article class="access-item">
-              <h3>Учебные материалы</h3>
-              <p>Получайте доступ к материалам по курсу и полезным ресурсам для подготовки.</p>
+            <article>
+              <span></span>
+              <div>
+                <h4>Материалы</h4>
+                <p>Получает теорию, памятки и полезные ресурсы по курсу.</p>
+              </div>
             </article>
-            <article class="access-item">
-              <h3>Уведомления</h3>
-              <p>Следите за изменениями статуса заявки, занятий и записей внутри сайта.</p>
+            <article>
+              <span></span>
+              <div>
+                <h4>Прогресс</h4>
+                <p>Следит за пройденными темами и часами практики.</p>
+              </div>
             </article>
           </div>
         </div>
-        <aside class="cabinet-preview" aria-label="Пример личного кабинета">
-          <div class="preview-top">
-            <strong>Личный кабинет</strong>
-            <span>после зачисления</span>
-          </div>
-          <div class="preview-row">
-            <span class="preview-dot blue"></span>
-            <div>
-              <strong>Расписание</strong>
-              <small>Практика · 18:30 · 2 места</small>
-            </div>
-          </div>
-          <div class="preview-row">
-            <span class="preview-dot yellow"></span>
-            <div>
-              <strong>Материалы ПДД</strong>
-              <small>доступны по курсу</small>
-            </div>
-          </div>
-          <div class="preview-row">
-            <span class="preview-dot green"></span>
-            <div>
-              <strong>Уведомления</strong>
-              <small>статус заявки и записи</small>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -191,27 +184,26 @@
       <div class="landing-container">
         <div class="section-head section-head-centered">
           <div>
-            <p class="eyebrow">Почему это удобно</p>
-            <h2>Меньше неопределенности — больше контроля над обучением</h2>
-            <p>АвтоСтарт помогает видеть этапы обучения, заявки, уведомления и доступные занятия в одном месте.</p>
+            <h2>Почему выбирают АвтоСтарт</h2>
+            <p>Мы делаем обучение понятным: от выбора программы до практических занятий с инструктором.</p>
           </div>
         </div>
         <div class="reason-grid">
           <article class="reason-card route-icon">
-            <h3>Понятный путь</h3>
-            <p>Вы видите, что происходит после регистрации: заявка, обработка, зачисление и доступ к обучению.</p>
+            <h3>Обучение в Красноярске</h3>
+            <p>Занятия проходят в городе, учебный процесс привязан к реальным маршрутам и расписанию автошколы.</p>
           </article>
           <article class="reason-card phone-icon">
-            <h3>Меньше лишних звонков</h3>
-            <p>Заявка передается администратору, а важные изменения отображаются в личном кабинете.</p>
+            <h3>Опытные инструкторы</h3>
+            <p>Инструкторы помогают спокойно отработать площадку, город, парковку и сложные маневры.</p>
           </article>
           <article class="reason-card calendar-icon">
-            <h3>Запись на свободные занятия</h3>
-            <p>После зачисления можно выбрать доступное практическое занятие и не записываться повторно на одно и то же время.</p>
+            <h3>Понятные программы</h3>
+            <p>На сайте видны курсы, сроки, стоимость и дальнейшие шаги после подачи заявки.</p>
           </article>
           <article class="reason-card notice-icon">
-            <h3>Уведомления внутри сайта</h3>
-            <p>Система сообщает о статусе заявки, записи, отмене и изменениях занятий.</p>
+            <h3>Контроль этапов обучения</h3>
+            <p>После зачисления администратор и инструктор отмечают занятия, а студент видит свой прогресс.</p>
           </article>
         </div>
       </div>
@@ -221,7 +213,6 @@
       <div class="landing-container">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Практика</p>
             <h2>Инструкторы, с которыми спокойно учиться</h2>
             <p>Практические занятия помогают отработать площадку, город, парковку и сложные маневры.</p>
           </div>
@@ -235,7 +226,6 @@
     <section class="landing-section final-cta">
       <div class="landing-container cta-panel">
         <div>
-          <p class="eyebrow">Следующий шаг</p>
           <h2>Готовы начать обучение?</h2>
           <p>Создайте аккаунт, выберите курс и отправьте заявку. Администратор свяжется с вами для оформления договора и оплаты.</p>
           <small>Онлайн-оплата на сайте не используется — оформление проходит после связи с администратором.</small>
@@ -248,7 +238,50 @@
     </section>
   </main>
 
-  <footer class="footer">АвтоСтарт · учебный центр вождения</footer>
+  <footer class="footer" id="contacts">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <section class="footer-brand-block" aria-label="АвтоСтарт">
+          <a class="brand footer-brand" href="index.html" aria-label="АвтоСтарт — на главную">
+            <span>АвтоСтарт</span>
+          </a>
+          <p class="footer-lead">Учебный центр вождения в Красноярске</p>
+          <p>Выберите программу обучения, отправьте заявку и после зачисления пользуйтесь учебным кабинетом.</p>
+        </section>
+
+        <nav class="footer-column" aria-label="Разделы сайта">
+          <h3>Разделы</h3>
+          <div class="footer-links-row">
+            <a href="#courses">Курсы</a>
+            <a href="#steps">Этапы обучения</a>
+            <a href="#instructors">Инструкторы</a>
+            <a href="#contacts">Контакты</a>
+            <button type="button" class="footer-link-button" data-open-enrollment>Оставить заявку</button>
+          </div>
+        </nav>
+
+        <address class="footer-column footer-contacts">
+          <h3>Контакты</h3>
+          <div class="footer-contact-list">
+            <p>
+              <strong>Красноярск, ул. Московская, 40</strong>
+              <span>Учебный центр вождения</span>
+            </p>
+            <p>
+              <strong>Пн-Пт: 9:00-18:00</strong>
+              <span>Заявки принимаются через сайт</span>
+            </p>
+            <small>После отправки заявки администратор свяжется с вами и уточнит детали оформления.</small>
+          </div>
+        </address>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 АвтоСтарт. Учебный центр вождения.</span>
+        <span>Договор и оплата оформляются после связи с администратором.</span>
+      </div>
+    </div>
+  </footer>
 
   <script src="js/api.js?v=5"></script>
   <script src="js/main.js?v=8"></script>

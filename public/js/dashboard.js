@@ -457,6 +457,7 @@ function renderProfile() {
         <h3>${escapeHtml(fullName(profile))}</h3>
         <p>Если данные изменились свяжитесь с администратором.</p>
       </div>
+      <span class="profile-role">Обучающийся</span>
     </div>
     <div class="profile-fields">
       <div><span>Телефон</span><strong>${escapeHtml(profile.Phone || profile.phone || 'Не указан')}</strong></div>
@@ -528,7 +529,7 @@ function renderTheory() {
       <section class="theory-topic-detail">
         <div class="theory-detail-head">
           <div>
-            <span class="status new">Выбранная тема</span>
+            <span class="section-kicker">Выбранная тема</span>
             <h3>${escapeHtml(currentTopic.Title)}</h3>
             <p>Выберите удобное время у доступного преподавателя и запишитесь на занятие.</p>
           </div>
@@ -549,7 +550,7 @@ function renderDriving() {
     progress.innerHTML = `
       <div class="driving-summary-card">
         <div>
-          <span class="status new">Практика</span>
+          <span class="section-kicker">Практика</span>
           <h3>Прогресс вождения: ${drivenHours()} из ${requiredHours} часов</h3>
           <p>До допуска к практическому экзамену осталось ${remaining} часов.</p>
         </div>
@@ -592,7 +593,7 @@ function renderExams() {
       <div class="student-card-actions">${renderBookingAction(practiceExam, practiceExamUnlocked() ? '' : `Сначала нужно набрать ${requiredHours} часов вождения.`)}</div>
     </article>
     <article class="exam-card">
-      <span class="status new">Информация</span>
+      <span class="section-kicker">Информация</span>
       <h3>Экзамены ГИБДД</h3>
       <p>Запись на экзамен в ГИБДД выполняется через администратора автошколы после допуска и проверки документов.</p>
       <button type="button" class="secondary" data-section-jump="contacts">Связаться с администратором</button>
@@ -611,7 +612,7 @@ function renderProgressDetails() {
     <div class="progress-dashboard">
       <section class="student-panel progress-main-card">
         <div>
-          <span class="status new">Общий прогресс</span>
+          <h3>Общий прогресс</h3>
           <strong class="big-progress">${overallProgress()}%</strong>
         </div>
         ${progressBar(overallProgress())}
@@ -643,7 +644,7 @@ function renderMaterials() {
 
   container.innerHTML = materials.length ? materials.map((material) => `
     <article class="material-card-app">
-      <span class="status new">${escapeHtml(material.CourseTitle || 'Общий материал')}</span>
+      <span class="section-kicker">${escapeHtml(material.CourseTitle || 'Общий материал')}</span>
       <h3>${escapeHtml(material.Title)}</h3>
       <p>${escapeHtml(material.Description || 'Описание отсутствует.')}</p>
       <div class="meta">Тип: ${material.FileUrl ? 'ссылка или файл' : 'конспект'}</div>
